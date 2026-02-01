@@ -162,13 +162,31 @@ char *getCharPtrByBreed(char **dictionary, char *breedName, int breedCount) {
 // Returns: Pointer to allocated CatStore
 // ---------------------
 CatStore *createStore(int kennelCount, int breedCount, char **dictionary) {
-    // TODO:
-    // 1. Allocate space for CatStore
-    // 2. Read and allocate the 2D capacities array
-    // 3. Create all kennels using createKennels
-    // 4. Fill in store fields
+    // Allocate space for CatStore
+    CatStore *store = malloc(sizeof(CatStore));
     
-    return NULL;  // Replace this
+    // Allocate the 2D capacities array (rows)
+    store->capacities = malloc(kennelCount * sizeof(int *));
+    
+    // Allocate each row (columns for each kennel)
+    for (int i = 0; i < kennelCount; i++) {
+        store->capacities[i] = malloc(breedCount * sizeof(int));
+    }
+    
+    // Read capacity constraints for each kennel and breed
+    for (int i = 0; i < kennelCount; i++) {
+        for (int j = 0; j < breedCount; j++) {
+            scanf("%d", &store->capacities[i][j]);
+        }
+    }
+    
+    // Create all kennels using createKennels
+    store->kennels = createKennels(store->capacities, kennelCount, breedCount, dictionary);
+    
+    // Set the number of kennels
+    store->numKennels = kennelCount;
+    
+    return store;
 }
 
 
@@ -178,15 +196,35 @@ CatStore *createStore(int kennelCount, int breedCount, char **dictionary) {
 // Returns: Array of Kennel structs
 // ---------------------
 Kennel *createKennels(int **constraints, int kennelCount, int breedCount, char **dictionary) {
-    // TODO:
-    // 1. Allocate array of Kennel structs
-    // 2. For each kennel:
-    //    - Read location name (allocate dynamically)
-    //    - Read number of cats
-    //    - Create cats using createCats
-    //    - Calculate maxCapacity from constraints
+    // Allocate array of Kennel structs
+    Kennel *kennels = malloc(kennelCount * sizeof(Kennel));
     
-    return NULL;  // Replace this
+    // For each kennel
+    for (int i = 0; i < kennelCount; i++) {
+        // Read location name (allocate dynamically)
+        char temp[100];
+        scanf("%s", temp);
+        kennels[i].location = malloc((strlen(temp) + 1) * sizeof(char));
+        strcpy(kennels[i].location, temp);
+        
+        // Read number of cats
+        int numCats;
+        scanf("%d", &numCats);
+        
+        // Create cats using createCats
+        kennels[i].cats = createCats(dictionary, breedCount, numCats);
+        
+        // Set occupancy
+        kennels[i].occupancy = numCats;
+        
+        // Calculate maxCapacity from constraints
+        kennels[i].maxCapacity = 0;
+        for (int j = 0; j < breedCount; j++) {
+            kennels[i].maxCapacity += constraints[i][j];
+        }
+    }
+    
+    return kennels;  
 }
 
 
@@ -199,12 +237,19 @@ Cat **createCats(char **dictionary, int breedCount, int count) {
     // TODO:
     // 1. Allocate array of Cat pointers
 
+    Cat **cats = malloc(count * sizeof(Cat *));
 
+    // 2. Loop to create each cat
 
+    for (int i = 0; i < count; i++)
+    {
+        // 3. Create one cat and store it
+            cats[i] = createSingleCat(dictionary, breedCount);
 
+    }
 
     
-    return NULL;  // Replace this
+    return cats; 
 }
 
 
@@ -295,11 +340,27 @@ int getCatPosi(Kennel *home, Cat *cat) {
 // Returns: Pointer to the cat, or NULL if not found
 // ---------------------
 Cat *getCatByName(CatStore *s, char *catName) {
-    // TODO:
-    // Loop through all kennels and their cats
-    // Use strcmp to compare names
+    // Loop through each kennel in the store
+    for (int i = 0; i < s->numKennels; i++) {
+        // s->kennels[i] accesses the i-th kennel in the kennels array
+        // s->kennels[i].occupancy gets how many cats are in this kennel
+        
+        // Loop through each cat in the current kennel
+        for (int j = 0; j < s->kennels[i].occupancy; j++) {
+            // s->kennels[i].cats is the array of cat pointers for kennel i
+            // s->kennels[i].cats[j] is the j-th cat pointer in that array
+            // s->kennels[i].cats[j]->name accesses the name field of that cat
+            
+            // Compare the cat's name with the name we're looking for
+            if (strcmp(catName, s->kennels[i].cats[j]->name) == 0) {
+                // Found a match! Return pointer to this cat
+                return s->kennels[i].cats[j];
+            }
+        }
+    }
     
-    return NULL;  // Replace this
+    // Searched all kennels and all cats - cat not found
+    return NULL;
 }
 
 
