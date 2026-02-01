@@ -1,0 +1,32 @@
+Onyx 2.00 1 ScratchPostCity AVAILABLE
+Quartz 2.10 1 SunbeamBay AVAILABLE
+Ivy 2.20 1 CardboardKingdom AVAILABLE
+Cedar 2.30 1 MidnightMeows AVAILABLE
+Fig 2.40 1 MilkBarAlley AVAILABLE
+Onyx moved successfully to SunbeamBay
+Jade moved successfully to SunbeamBay
+Ivy moved successfully to SunbeamBay
+Willow moved successfully to SunbeamBay
+Cedar moved successfully to SunbeamBay
+Mapleleaf moved successfully to SunbeamBay
+Ruby 4.00 3 ScratchPostCity AVAILABLE
+Hazel 4.10 3 SunbeamBay AVAILABLE
+Pine 4.20 3 CardboardKingdom AVAILABLE
+Chestnut 4.30 3 MidnightMeows AVAILABLE
+Moss 4.40 3 MilkBarAlley AVAILABLE
+Goldie 3.10 2 SunbeamBay AVAILABLE
+Jade 3.00 2 SunbeamBay AVAILABLE
+Willow 3.20 2 SunbeamBay AVAILABLE
+Mapleleaf 3.30 2 SunbeamBay AVAILABLE
+Olive 3.40 2 MilkBarAlley AVAILABLE
+SunbeamBay cannot take a NorwegianForest cat!
+Quartz 2.10 1 SunbeamBay AVAILABLE
+Onyx 2.00 1 SunbeamBay AVAILABLE
+Ivy 2.20 1 SunbeamBay AVAILABLE
+Cedar 2.30 1 SunbeamBay AVAILABLE
+Fig 2.40 1 MilkBarAlley AVAILABLE
+Fig is now ADOPTED!
+Quartz 2.10 1 SunbeamBay AVAILABLE
+Onyx 2.00 1 SunbeamBay AVAILABLE
+Ivy 2.20 1 SunbeamBay AVAILABLE
+Cedar 2.30 1 SunbeamBay AVAILABLE

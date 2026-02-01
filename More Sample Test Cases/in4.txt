@@ -1,0 +1,13 @@
+2
+RussianBlue
+Snowshoe
+2
+3 3
+3 3
+ScratchPostCity 1
+Kitty 2 4.40 RussianBlue
+SunbeamBay 0
+3
+1 RussianBlue
+3 Kitty SunbeamBay
+1 RussianBlue

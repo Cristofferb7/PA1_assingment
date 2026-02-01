@@ -1,0 +1,14 @@
+Charlie 52.55 12 Polterland AVAILABLE
+Patra 11.15 4 Polterland AVAILABLE
+Coco 23.20 14 Auburndale AVAILABLE
+Channel 18.30 13 Auburndale AVAILABLE
+Charlie is now PENDING!
+Charlie is now ADOPTED!
+Patra 11.15 4 Polterland AVAILABLE
+Coco 23.20 14 Auburndale AVAILABLE
+Channel 18.30 13 Auburndale AVAILABLE
+Caesar moved successfully to Auburndale
+Sad moved successfully to Narnia
+Narnia cannot take a Ragdoll cat!
+Cleo is now ADOPTED!
+No cat with breed Tuxedo

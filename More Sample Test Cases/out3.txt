@@ -1,0 +1,56 @@
+Nutmeg moved successfully to WhiskerVille
+Zigzag is now PENDING!
+Mars is now PENDING!
+Zigzag is now ADOPTED!
+Maple is now PENDING!
+Cloud moved successfully to Catopia
+Tuna moved successfully to MeowTown
+Ash moved successfully to MeowTown
+Tofu 12.95 6 TreatsLand AVAILABLE
+Pebble 8.37 7 Catopia AVAILABLE
+Marble 3.86 1 Catopia AVAILABLE
+Shadow 9.42 2 Catopia AVAILABLE
+Nala 4.95 18 Catopia AVAILABLE
+Latte 13.14 17 WhiskerVille AVAILABLE
+Cinnamon 9.92 13 WhiskerVille AVAILABLE
+Comet 4.54 2 MeowTown AVAILABLE
+Nova 3.81 16 MeowTown AVAILABLE
+Tofu 12.95 6 TreatsLand AVAILABLE
+Pebble 8.37 7 Catopia AVAILABLE
+Marble 3.86 1 Catopia AVAILABLE
+Shadow 9.42 2 Catopia AVAILABLE
+Nala 4.95 18 Catopia AVAILABLE
+Latte 13.14 17 WhiskerVille AVAILABLE
+Cinnamon 9.92 13 WhiskerVille AVAILABLE
+Comet 4.54 2 MeowTown AVAILABLE
+Nova 3.81 16 MeowTown AVAILABLE
+Pixel 7.78 6 TreatsLand AVAILABLE
+Bean 12.63 15 TreatsLand AVAILABLE
+Waffle 3.67 10 TreatsLand AVAILABLE
+Luna 4.93 6 Catopia AVAILABLE
+Cleo 4.87 5 Catopia AVAILABLE
+Espresso 8.34 9 WhiskerVille AVAILABLE
+Rocket 5.72 17 MeowTown AVAILABLE
+Mars 10.54 2 MeowTown PENDING
+Luna moved successfully to WhiskerVille
+Tofu moved successfully to MeowTown
+Mocha moved successfully to WhiskerVille
+Cloud moved successfully to Catopia
+Pixel 7.78 6 TreatsLand AVAILABLE
+Bean 12.63 15 TreatsLand AVAILABLE
+Waffle 3.67 10 TreatsLand AVAILABLE
+Cleo 4.87 5 Catopia AVAILABLE
+Espresso 8.34 9 WhiskerVille AVAILABLE
+Luna 4.93 6 WhiskerVille AVAILABLE
+Rocket 5.72 17 MeowTown AVAILABLE
+Mars 10.54 2 MeowTown PENDING
+Pebble moved successfully to MeowTown
+Marble moved successfully to MeowTown
+Mochi moved successfully to TreatsLand
+Maple is now ADOPTED!
+Shadow moved successfully to MeowTown
+Nala moved successfully to MeowTown
+Latte moved successfully to MeowTown
+MeowTown cannot take a Sphynx cat!
+Latte is now ADOPTED!
+Cinnamon moved successfully to MeowTown

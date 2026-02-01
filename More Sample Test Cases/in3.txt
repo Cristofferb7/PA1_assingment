@@ -1,0 +1,97 @@
+6
+Ragdoll
+Siamese
+Bengal
+Persian
+Tabby
+Sphynx
+4
+7 8 6 8 8 5
+6 6 5 8 8 7
+9 5 5 8 10 10
+5 8 9 7 6 8
+TreatsLand 15
+Mochi 16 7.55 Persian
+Boba 8 12.52 Ragdoll
+Noodle 3 13.14 Bengal
+Pixel 6 7.78 Siamese
+Bean 15 12.63 Siamese
+Tuna 8 2.54 Persian
+Miso 18 6.35 Tabby
+Waffle 10 3.67 Siamese
+Nacho 2 4.87 Tabby
+Pudding 14 7.38 Tabby
+Tofu 6 12.95 Sphynx
+Sprinkles 14 9.95 Ragdoll
+Cookie 4 5.53 Ragdoll
+Churro 18 6.83 Ragdoll
+Dumpling 10 12.17 Bengal
+Catopia 14
+Pebble 7 8.37 Sphynx
+Pickles 15 4.70 Ragdoll
+Zigzag 3 4.17 Persian
+Marble 1 3.86 Sphynx
+Pumpkin 9 8.38 Bengal
+Shadow 2 9.42 Sphynx
+Luna 6 4.93 Siamese
+Milo 15 12.84 Ragdoll
+Leo 7 10.43 Persian
+Nala 18 4.95 Sphynx
+Simba 15 4.84 Tabby
+Cleo 5 4.87 Siamese
+Oscar 15 10.33 Bengal
+Bella 15 5.68 Persian
+WhiskerVille 13
+Chai 11 4.29 Persian
+Mocha 6 2.87 Bengal
+Latte 17 13.14 Sphynx
+Espresso 9 8.34 Siamese
+Cinnamon 13 9.92 Sphynx
+Nutmeg 17 5.56 Persian
+Honey 11 7.06 Tabby
+Maple 2 8.41 Ragdoll
+Storm 6 12.41 Bengal
+Ash 2 10.87 Bengal
+Ember 5 13.93 Tabby
+Snow 4 5.35 Ragdoll
+Cloud 16 7.92 Tabby
+MeowTown 12
+Rain 7 12.36 Ragdoll
+Thunder 5 7.58 Ragdoll
+Sunny 17 9.64 Tabby
+Comet 2 4.54 Sphynx
+Nova 16 3.81 Sphynx
+Orbit 12 11.26 Persian
+Cosmo 10 7.18 Persian
+Rocket 17 5.72 Siamese
+Astro 2 6.46 Bengal
+Pluto 1 6.18 Persian
+Venus 4 7.43 Tabby
+Mars 2 10.54 Siamese
+26
+3 Nutmeg WhiskerVille
+2 1 Zigzag
+2 1 Mars
+2 0 Zigzag
+2 1 Maple
+3 Cloud Catopia
+3 Tuna MeowTown
+3 Ash MeowTown
+1 Sphynx
+1 Sphynx
+1 Siamese
+3 Luna WhiskerVille
+3 Tofu MeowTown
+3 Mocha WhiskerVille
+3 Cloud Catopia
+1 Siamese
+3 Pebble MeowTown
+3 Marble MeowTown
+3 Mochi TreatsLand
+2 0 Maple
+3 Shadow MeowTown
+3 Nala MeowTown
+3 Latte MeowTown
+3 Cinnamon MeowTown
+2 0 Latte
+3 Cinnamon MeowTown

@@ -1,0 +1,44 @@
+3
+NorwegianForest
+Birman
+Bengal
+5
+4 4 4
+4 4 4
+5 5 5
+5 5 5
+5 5 5
+ScratchPostCity 3
+Onyx 1 2.0 NorwegianForest
+Jade 2 3.0 Birman
+Ruby 3 4.0 Bengal
+SunbeamBay 3
+Quartz 1 2.1 NorwegianForest
+Goldie 2 3.1 Birman
+Hazel 3 4.1 Bengal
+CardboardKingdom 3
+Ivy 1 2.2 NorwegianForest
+Willow 2 3.2 Birman
+Pine 3 4.2 Bengal
+MidnightMeows 3
+Cedar 1 2.3 NorwegianForest
+Mapleleaf 2 3.3 Birman
+Chestnut 3 4.3 Bengal
+MilkBarAlley 3
+Fig 1 2.4 NorwegianForest
+Olive 2 3.4 Birman
+Moss 3 4.4 Bengal
+13
+1 NorwegianForest
+3 Onyx SunbeamBay
+3 Jade SunbeamBay
+3 Ivy SunbeamBay
+3 Willow SunbeamBay
+3 Cedar SunbeamBay
+3 Mapleleaf SunbeamBay
+1 Bengal
+1 Birman
+3 Fig SunbeamBay
+1 NorwegianForest
+2 0 Fig
+1 NorwegianForest
