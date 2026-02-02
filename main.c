@@ -73,23 +73,26 @@ void freeStore(int count, CatStore *store);
 // PART 4: MAIN FUNCTION - The flow of the program
 // ====================================================================================
 int main() {
+    
     // STEP 1: Read the breeds dictionary
     int breedCount = 0;
     char **dictionary = readBreeds(&breedCount);
     
-    // STEP 2: Create the store (which creates kennels and cats)
-    int kennelCount = 0;
+    // STEP 2: Read the number of kennels
+    int kennelCount;
     scanf("%d", &kennelCount);
     
+    // STEP 3: Create the store (reads constraints, kennels, and cats)
     CatStore *store = createStore(kennelCount, breedCount, dictionary);
     
-    // STEP 3: Process queries
-    int numQueries = 0;
+    // STEP 4: Read number of queries
+    int numQueries;
     scanf("%d", &numQueries);
     
+    // STEP 5: Process all queries
     runQueries(store, dictionary, breedCount, numQueries);
     
-    // STEP 4: Clean up all memory
+    // STEP 6: Clean up all memory
     freeStore(kennelCount, store);
     freeBreeds(dictionary, breedCount);
     
@@ -295,15 +298,76 @@ Cat *createSingleCat(char **dictionary, int breedCount) {
 // Returns: 1 if can move, 0 if cannot
 // ---------------------
 int canMoveTo(CatStore *s, char *location, char *breed, char **dictionary, int breedCount) {
-    // TODO:
-    // 1. Find the kennel with this location
-    // 2. Find the breed index in dictionary
-    // 3. Count how many cats of this breed are already in the kennel
-    // 4. Check if adding one more would exceed:
-    //    - The breed-specific capacity
-    //    - The overall maxCapacity
+    // Step 1: Find the kennel with this location
+    Kennel *targetKennel = NULL;
     
-    return 0;  // Replace this
+    // Loop through all kennels to find the one with matching location
+    for (int i = 0; i < s->numKennels; i++) {
+        // s->kennels[i].location is the location name of the i-th kennel
+        // strcmp returns 0 when strings match, so we check == 0
+        if (strcmp(location, s->kennels[i].location) == 0) {
+            // Found the kennel! Store its address
+            targetKennel = &s->kennels[i];
+            break;
+        }
+    }
+    
+    // Step 2: Find the breed index in dictionary
+    int breedIndex = -1;
+    
+    // Loop through the breed dictionary
+    for (int i = 0; i < breedCount; i++) {
+        // Compare the breed name with each dictionary entry
+        if (strcmp(breed, dictionary[i]) == 0) {
+            // Found the breed! Store its index
+            breedIndex = i;
+            break;
+        }
+    }
+    
+    // Step 3: Count how many cats of this breed are already in the kennel
+    int currentBreedCount = 0;
+    
+    // Loop through all cats in the target kennel
+    for (int i = 0; i < targetKennel->occupancy; i++) {
+        // targetKennel->cats[i] is the i-th cat pointer
+        // targetKennel->cats[i]->breed is that cat's breed string
+        if (strcmp(targetKennel->cats[i]->breed, breed) == 0) {
+            // This cat matches the breed we're checking
+            currentBreedCount++;
+        }
+    }
+    
+    // Step 4: Check if adding one more cat would exceed the overall maxCapacity
+    // targetKennel->occupancy is current number of cats
+    // targetKennel->maxCapacity is the maximum total cats allowed
+    if (targetKennel->occupancy + 1 > targetKennel->maxCapacity) {
+        // Would exceed total capacity - cannot move
+        return 0;
+    }
+    
+    // Step 5: Find the kennel's index in the store's kennels array
+    int kennelIndex = -1;
+    
+    // Loop through kennels to find which index matches our targetKennel
+    for (int i = 0; i < s->numKennels; i++) {
+        // &s->kennels[i] is the address of the i-th kennel
+        // Compare with targetKennel pointer
+        if (&s->kennels[i] == targetKennel) {
+            kennelIndex = i;
+            break;
+        }
+    }
+    
+    // Step 6: Check if adding one more would exceed the breed-specific capacity
+    // s->capacities[kennelIndex][breedIndex] is the max cats of this breed for this kennel
+    if (currentBreedCount + 1 > s->capacities[kennelIndex][breedIndex]) {
+        // Would exceed breed-specific capacity - cannot move
+        return 0;
+    }
+    
+    // All checks passed - cat can be moved to this kennel
+    return 1;
 }
 
 
@@ -313,11 +377,27 @@ int canMoveTo(CatStore *s, char *location, char *breed, char **dictionary, int b
 // Returns: Pointer to the kennel, or NULL if not found
 // ---------------------
 Kennel *getKennelByCat(CatStore *s, Cat *cat) {
-    // TODO:
-    // Loop through all kennels and their cats to find this cat
-    // Compare POINTERS, not names (use ==, not strcmp)
+    // Loop through each kennel in the store
+    for (int i = 0; i < s->numKennels; i++) {
+        // s->kennels[i] accesses the i-th kennel in the kennels array
+        // s->kennels[i].occupancy gets how many cats are in this kennel
+        
+        // Loop through each cat in the current kennel
+        for (int j = 0; j < s->kennels[i].occupancy; j++) {
+            // s->kennels[i].cats[j] is the j-th cat pointer in kennel i
+            
+            // Compare POINTERS, not names (use ==, not strcmp)
+            // We're checking if the cat we're looking for is the same cat object
+            if (cat == s->kennels[i].cats[j]) {
+                // Found the cat! Return address of this kennel
+                // &s->kennels[i] gets the address of the i-th kennel
+                return &s->kennels[i];
+            }
+        }
+    }
     
-    return NULL;  // Replace this
+    // Searched all kennels - cat not found in any kennel
+    return NULL;
 }
 
 
@@ -327,10 +407,21 @@ Kennel *getKennelByCat(CatStore *s, Cat *cat) {
 // Returns: Index of cat, or -1 if not found
 // ---------------------
 int getCatPosi(Kennel *home, Cat *cat) {
-    // TODO:
-    // Loop through home->cats and find the index where cats[i] == cat
+    // Loop through all cats in this kennel
+    // home->occupancy is how many cats are in the kennel
+    for (int i = 0; i < home->occupancy; i++) {
+        // home->cats is the array of cat pointers
+        // home->cats[i] is the i-th cat pointer in the array
+        
+        // Compare POINTERS to see if this is the cat we're looking for
+        if (cat == home->cats[i]) {
+            // Found it! Return the index position
+            return i;
+        }
+    }
     
-    return -1;  // Replace this
+    // Cat not found in this kennel - return -1 to indicate failure
+    return -1;
 }
 
 
@@ -372,9 +463,29 @@ Cat *getCatByName(CatStore *s, char *catName) {
 void removeCatFromKennel(Kennel *k, Cat *cat) {
     // TODO:
     // 1. Find position of cat in array
+
+        int position = getCatPosi(k, cat);
+
     // 2. Shift all cats after it down one position
+
+        if (position == -1)
+        {
+            return;
+        }
+
+        for (int i = position; i < k->occupancy - 1  ; i++)
+        {
+            k->cats[i] = k->cats[i+1];
+        }
+        
+        
     // 3. Decrease occupancy
+        k->occupancy--;
+
+
     // 4. Realloc the cats array to be smaller
+
+     k->cats = realloc(k->cats, k->occupancy * sizeof(Cat *));
     // NOTE: Don't free the cat itself!
     
 }
@@ -386,14 +497,134 @@ void removeCatFromKennel(Kennel *k, Cat *cat) {
 // Returns: Nothing (void)
 // ---------------------
 void runQueries(CatStore *s, char **dictionary, int breedCount, int numQueries) {
-    // TODO:
-    // Loop through queries
-    // Read query type (1, 2, or 3)
-    // Call appropriate handler for each type
     
-    // Query 1: Print all cats of a breed
-    // Query 2: Update cat status (and remove if adopted)
-    // Query 3: Move cat between kennels
+    // Loop through all queries
+    for (int i = 0; i < numQueries; i++) {
+        
+        int queryType;
+        // Read the query type (1, 2, or 3)
+        scanf("%d", &queryType);
+        
+        // Query Type 1: Print all cats of a specific breed
+        if (queryType == 1) {
+            
+            // Read the breed name
+            char breed[100];
+            scanf("%s", breed);
+            
+            // Track if we found any cats
+            int found = 0;
+            
+            // Loop through all kennels
+            for (int j = 0; j < s->numKennels; j++) {
+                
+                // Loop through all cats in this kennel
+                for (int k = 0; k < s->kennels[j].occupancy; k++) {
+                    
+                    // Check if this cat's breed matches
+                    if (strcmp(s->kennels[j].cats[k]->breed, breed) == 0) {
+                        
+                        // Print cat info: name, weight, age, location, status
+                        printf("%s %.2f %d %s %s\n",
+                               s->kennels[j].cats[k]->name,
+                               s->kennels[j].cats[k]->weight,
+                               s->kennels[j].cats[k]->age,
+                               s->kennels[j].location,
+                               STATUS_CAT[s->kennels[j].cats[k]->status]);
+                        
+                        found = 1;
+                    }
+                }
+            }
+            
+            // If no cats found, print message
+            if (found == 0) {
+                printf("No cat with breed %s\n", breed);
+            }
+        }
+        
+        // Query Type 2: Update cat status
+        else if (queryType == 2) {
+            
+            int newStatus;
+            char catName[100];
+            
+            // Read new status and cat name
+            scanf("%d", &newStatus);
+            scanf("%s", catName);
+            
+            // Find the cat by name
+            Cat *cat = getCatByName(s, catName);
+            
+            // Update the cat's status
+            cat->status = newStatus;
+            
+            // Print status update message
+            printf("%s is now %s!\n", cat->name, STATUS_CAT[newStatus]);
+            
+            // If adopted, remove from kennel and free memory
+            if (newStatus == 0) {
+                
+                // Find which kennel has this cat
+                Kennel *home = getKennelByCat(s, cat);
+                
+                // Remove cat from kennel
+                removeCatFromKennel(home, cat);
+                
+                // Free the cat's memory
+                free(cat->name);
+                free(cat);
+            }
+        }
+        
+        // Query Type 3: Move cat between kennels
+        else if (queryType == 3) {
+            
+            char catName[100];
+            char newLocation[100];
+            
+            // Read cat name and destination location
+            scanf("%s", catName);
+            scanf("%s", newLocation);
+            
+            // Find the cat
+            Cat *cat = getCatByName(s, catName);
+            
+            // Check if cat can move to the new location
+            if (canMoveTo(s, newLocation, cat->breed, dictionary, breedCount)) {
+                
+                // Can move!
+                // Find cat's current kennel
+                Kennel *oldKennel = getKennelByCat(s, cat);
+                
+                // Find the destination kennel
+                Kennel *newKennel = NULL;
+                for (int j = 0; j < s->numKennels; j++) {
+                    if (strcmp(s->kennels[j].location, newLocation) == 0) {
+                        newKennel = &s->kennels[j];
+                        break;
+                    }
+                }
+                
+                // Remove from old kennel
+                removeCatFromKennel(oldKennel, cat);
+                
+                // Resize new kennel's cats array
+                newKennel->cats = realloc(newKennel->cats, (newKennel->occupancy + 1) * sizeof(Cat *));
+                
+                // Add cat to new kennel
+                newKennel->cats[newKennel->occupancy] = cat;
+                newKennel->occupancy++;
+                
+                // Print success message
+                printf("%s moved successfully to %s\n", cat->name, newLocation);
+                
+            } else {
+                // Cannot move - print error message
+                printf("%s cannot take a %s cat!\n", newLocation, cat->breed);
+            }
+        }
+    }
 }
 
 
@@ -405,7 +636,13 @@ void runQueries(CatStore *s, char **dictionary, int breedCount, int numQueries) 
 void freeBreeds(char **dictionary, int breedCount) {
     // TODO:
     // 1. Free each breed string
+        for (int i = 0; i < breedCount; i++)
+        {
+            free(dictionary[i]);
+        }
+        
     // 2. Free the array of pointers
+    free(dictionary);
 }
 
 
@@ -415,12 +652,40 @@ void freeBreeds(char **dictionary, int breedCount) {
 // Returns: Nothing (void)
 // ---------------------
 void freeStore(int count, CatStore *store) {
-    // TODO:
-    // 1. For each kennel:
-    //    - Free each cat (name, then cat struct)
-    //    - Free cats array
-    //    - Free location
-    // 2. Free kennels array
-    // 3. Free capacities 2D array
-    // 4. Free store itself
+    
+    // Free all cats in all kennels
+    for (int i = 0; i < count; i++) {
+        
+        // Free each cat in this kennel
+        for (int j = 0; j < store->kennels[i].occupancy; j++) {
+            
+            // Free cat's name
+            free(store->kennels[i].cats[j]->name);
+            
+            // Free the cat itself
+            free(store->kennels[i].cats[j]);
+        }
+        
+        // Free the kennel's cats array
+        free(store->kennels[i].cats);
+        
+        // Free the kennel's location
+        free(store->kennels[i].location);
+    }
+    
+    // Free the kennels array
+    free(store->kennels);
+    
+    // Free the 2D capacities array
+    for (int i = 0; i < count; i++) {
+        // Free each row
+        free(store->capacities[i]);
+    }
+    
+    // Free the array of row pointers
+    free(store->capacities);
+    
+    // Free the store itself
+    free(store);
 }
+
