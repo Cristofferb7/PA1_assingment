@@ -141,7 +141,6 @@ char **readBreeds(int *count) {
 // Returns: Pointer to the breed string in dictionary, or NULL if not found
 // ---------------------
 char *getCharPtrByBreed(char **dictionary, char *breedName, int breedCount) {
-    // TODO:
     // Loop through dictionary and use strcmp to find matching breed
 
     for (int i = 0; i < breedCount; i++)
@@ -237,13 +236,10 @@ Kennel *createKennels(int **constraints, int kennelCount, int breedCount, char *
 // Returns: Array of Cat pointers (Cat **)
 // ---------------------
 Cat **createCats(char **dictionary, int breedCount, int count) {
-    // TODO:
-    // 1. Allocate array of Cat pointers
-
+    // Allocate array of Cat pointers
     Cat **cats = malloc(count * sizeof(Cat *));
 
-    // 2. Loop to create each cat
-
+    // Loop to create each cat
     for (int i = 0; i < count; i++)
     {
         // 3. Create one cat and store it
@@ -262,14 +258,10 @@ Cat **createCats(char **dictionary, int breedCount, int count) {
 // Returns: Pointer to allocated Cat
 // ---------------------
 Cat *createSingleCat(char **dictionary, int breedCount) {
-    // TODO:
-    // 1. Allocate space for one Cat struct
-
-
+    // Allocate space for one Cat struct
     Cat *cat = malloc(sizeof(Cat));
 
-    // 2. Read the name using temp buffer
-
+    // Read the name using temp buffer
     char temp [100];
     scanf("%s", temp);
     cat -> name = malloc((strlen(temp)+1)*sizeof(char));
@@ -461,14 +453,11 @@ Cat *getCatByName(CatStore *s, char *catName) {
 // Returns: Nothing (void)
 // ---------------------
 void removeCatFromKennel(Kennel *k, Cat *cat) {
-    // TODO:
-    // 1. Find position of cat in array
+    // Find position of cat in array
+    int position = getCatPosi(k, cat);
 
-        int position = getCatPosi(k, cat);
-
-    // 2. Shift all cats after it down one position
-
-        if (position == -1)
+    // Shift all cats after it down one position
+    if (position == -1)
         {
             return;
         }
@@ -634,14 +623,13 @@ void runQueries(CatStore *s, char **dictionary, int breedCount, int numQueries) 
 // Returns: Nothing (void)
 // ---------------------
 void freeBreeds(char **dictionary, int breedCount) {
-    // TODO:
-    // 1. Free each breed string
-        for (int i = 0; i < breedCount; i++)
-        {
-            free(dictionary[i]);
-        }
+    // Free each breed string
+    for (int i = 0; i < breedCount; i++)
+    {
+        free(dictionary[i]);
+    }
         
-    // 2. Free the array of pointers
+    // Free the array of pointers
     free(dictionary);
 }
 
